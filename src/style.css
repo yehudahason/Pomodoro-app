@@ -1,3 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200..700;1,200..700&family=Big+Shoulders:opsz,wght@10..72,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Martian+Mono:wght@100..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  /* Primary Colors */
+  --color-cyan-300: #70f3f8;
+  --color-red-400: #f87070;
+  --color-purple-400: #d881f8;
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Grey Scale */
+  --color-grey-400: #bbbdcb;
+  --color-grey-100: #e4e2e2; /* Estimated from visual in third image */
+
+  /* Blue Scale */
+  --color-blue-950: #14172e;
+  --color-blue-900: #161932;
+  --color-blue-850: #1e213f;
+  --color-blue-100: #d7e0ff;
+  --color-blue-50: #eff1fa;
+
+  /* Gradients */
+  --gradient-1-start: #2e325a;
+  --gradient-1-end: #0e112a;
+  --gradient-main: linear-gradient(
+    135deg,
+    var(--gradient-1-start),
+    var(--gradient-1-end)
+  );
+  /* --- Fonts --- */
+  --font-primary: "Kumbh Sans";
+  --font-secondary: "Roboto Slab";
+  --font-mono: "Space Mono";
+
+  /* --- Font Weights --- */
+  --fw-bold: 700;
+  --fw-regular: 400;
+
+  /* --- Text Preset 1 (Large Headings) --- */
+  /* Desktop */
+  --fs-p1-d: 100px;
+  --lh-p1-d: 125%; /* Kumbh/Space range 125%-150% */
+  --ls-p1-d: -5px;
+
+  /* Mobile */
+  --fs-p1-m: 80px;
+  --lh-p1-m: 125%;
+  --ls-p1-m: -5px;
+
+  /* --- Text Preset 2 (Subheadings/Body Large) --- */
+  /* Desktop */
+  --fs-p2-d: 16px;
+  --lh-p2-d: 125%; /* Kumbh: 125%, Roboto/Space: 150% */
+  --ls-p2-d: 15px;
+
+  /* Mobile */
+  --fs-p2-m: 14px;
+  --lh-p2-m: 120%; /* Kumbh: 120%, Roboto/Space: 150% */
+  --ls-p2-m: 13px;
+
+  /* --- Text Preset 3 (Body/Small) --- */
+  /* Desktop */
+  --fs-p3-d: 14px;
+  --lh-p3-d: 120%;
+  --ls-p3-d: 0px;
+
+  /* Mobile */
+  --fs-p3-m: 12px;
+  --lh-p3-m: 125%; /* Range 125%-150% */
+  --ls-p3-m: 0px;
+
+  /* --- Text Preset 4 (Settings) --- */
+  --fs-p4: 12px;
+  --lh-p4: 125%;
+  --ls-p4: 0px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   /* background-color: #252839; */
 }
@@ -20,6 +103,10 @@ circle {
 
 .bg {
   stroke: #252839; /* Dark background ring color */
+}
+.surrond {
+  stroke: #ff7e71; /* The coral color from your image */
+  stroke-width: 8;
 }
 
 .progress {
