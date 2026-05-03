@@ -1,0 +1,43 @@
+body {
+  /* background-color: #252839; */
+}
+
+.timer-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.timer-svg {
+  transform: rotate(-90deg); /* Rotates so it starts at the top */
+}
+
+circle {
+  /* display: none; */
+  fill: none;
+  stroke-width: 8;
+}
+
+.bg {
+  stroke: #252839; /* Dark background ring color */
+}
+
+.progress {
+  stroke: #ff7e71; /* The coral color from your image */
+  stroke-linecap: round;
+
+  /* This is the magic: 
+     Circumference = 2 * π * r (2 * 3.14 * 45 ≈ 283) */
+  stroke-dasharray: 471.238;
+  stroke-dashoffset: 471.238; /* Change this value to decrease/increase the gap */
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(111, 27, 27);
+  font-family: sans-serif;
+  font-size: 2rem;
+}

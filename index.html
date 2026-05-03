@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend Mentor | Pomodoro app</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get("p");
+        var q = params.get("q");
+        var h = params.get("h");
+
+        if (p) {
+          // remove our redirect params
+          params.delete("p");
+          params.delete("q");
+          params.delete("h");
+
+          var clean =
+            window.location.pathname +
+            (params.toString() ? "?" + params.toString() : "");
+
+          // restore real URL
+          window.history.replaceState(null, "", clean);
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname.replace(/\/$/, "") +
+              p +
+              (q ? q : "") +
+              (h ? h : ""),
+          );
+        }
+      })();
+    </script>
+
+    <title>Title</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>
