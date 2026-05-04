@@ -5,7 +5,10 @@ export default function Timer() {
         <circle className="bg" cx="100" cy="100" r="89" />
         <circle className="progress" cx="100" cy="100" r="89" />
       </svg>
-      <div className="text">17:59</div>
+      <div id="time-display">
+        <h1></h1>
+        <p>start</p>
+      </div>
     </div>
   );
 }

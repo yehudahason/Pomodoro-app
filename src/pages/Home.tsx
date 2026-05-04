@@ -4,7 +4,7 @@ import Timer from "../components/Timer";
 // import SettingsModal from "../components/SettingModal";
 const Home = () => {
   useEffect(() => {
-    run();
+    run(25);
   }, []);
   return (
     <>

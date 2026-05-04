@@ -17,16 +17,37 @@ function setProgress(percent: number) {
   circle.style.strokeDashoffset = String(offset);
 }
 
-export function run() {
-  // Example: Animate from 0 to 100% over 5 seconds
+export function run(minutes: number) {
+  const timeEl: HTMLElement | null = document.querySelector("#time-display h1");
+
+  // 1. Calculate total seconds immediately
+  let totalSeconds = minutes * 60;
+  const decrementAmount = 100 / totalSeconds;
   let currentPercent = 100;
+
+  // Function to update the UI
+  const updateUI = (totalSecs: number) => {
+    if (!timeEl) return;
+    const m = Math.floor(totalSecs / 60);
+    const s = totalSecs % 60;
+    timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
+  };
+
+  // Initial display call
+  updateUI(totalSeconds);
+
   const interval = setInterval(() => {
-    if (currentPercent <= 0) {
+    totalSeconds--;
+    currentPercent -= decrementAmount;
+
+    if (totalSeconds <= 0) {
+      updateUI(0);
       setProgress(0);
       clearInterval(interval);
-    } else {
-      currentPercent--;
-      setProgress(currentPercent);
+      return;
     }
-  }, 50); // Updates every 50ms
+
+    updateUI(totalSeconds);
+    setProgress(currentPercent);
+  }, 1000);
 }

@@ -185,7 +185,6 @@ ul {
 }
 
 circle {
-  /* display: none; */
   fill: none;
   stroke-width: 8;
 }
@@ -199,16 +198,39 @@ circle {
 
   /* This is the magic: 
      Circumference = 2 * π * r (2 * 3.14 * 45 ≈ 283) */
-  stroke-dasharray: 471.238;
-  stroke-dashoffset: 471.238; /* Change this value to decrease/increase the gap */
+  stroke-dasharray: 559.203;
+  stroke-dashoffset: 559.203; /* Change this value to decrease/increase the gap */
 }
 
-.text {
+#time-display {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgb(111, 27, 27);
-  font-family: sans-serif;
-  font-size: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* gap: 1rem; */
+}
+#time-display h1 {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--color-blue-100);
+  font-size: var(--fs-p1-d);
+  line-height: var(--lh-p1-d);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-p1-d);
+  margin: 0;
+  padding: 0;
+}
+#time-display p {
+  font: var(--font-primary);
+  font-size: var(--fs-p2-d);
+  line-height: var(--lh-p2-d);
+  letter-spacing: var(--ls-p2-d);
+  color: var(--color-grey-400);
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
 }
