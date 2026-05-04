@@ -173,7 +173,7 @@ ul {
   background-clip: padding-box, border-box;
 
   /* 4. Your existing shadow */
-  box-shadow: -16px -16px 30px rgba(255, 255, 255, 0.05);
+  box-shadow: -16px -16px 36px rgba(255, 255, 255, 0.06);
 
   /* Required for the SVG positioning inside */
   display: flex;
