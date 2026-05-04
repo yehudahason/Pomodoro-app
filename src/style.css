@@ -43,7 +43,10 @@
   --fs-p1-d: 100px;
   --lh-p1-d: 125%; /* Kumbh/Space range 125%-150% */
   --ls-p1-d: -5px;
-
+  /* Desktop -setting */
+  --fs-p1-s: 28px;
+  --lh-p1-s: 125%; /* Kumbh/Space range 125%-150% */
+  --ls-p1-s: 0px;
   /* Mobile */
   --fs-p1-m: 80px;
   --lh-p1-m: 125%;
@@ -82,15 +85,101 @@
   box-sizing: border-box;
 }
 body {
-  /* background-color: #252839; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-primary);
+  font-weight: var(--fw-regular);
+  min-height: 100vh;
 }
-
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: var(--gradient-main);
+  overflow-x: hidden;
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  min-height: auto;
+  padding: 3rem;
+}
+.app-wrapper h1 {
+  text-align: center;
+  font-size: var(--fs-p1-s);
+  line-height: var(--lh-p1-s);
+  letter-spacing: var(--ls-p1-s);
+  color: var(--color-blue-100);
+  margin-bottom: 3.5rem;
+}
+ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  background-color: var(--color-blue-900);
+  min-height: auto;
+  padding: 0.5rem;
+  border-radius: 10rem;
+  border: none;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 10rem;
+  border: none;
+  font-size: var(--fs-p3-d);
+  line-height: var(--lh-p3-d);
+  letter-spacing: var(--ls-p3-d);
+  color: var(--color-blue-100);
+  font-weight: bold;
+  background: transparent;
+}
+.btn-p {
+  background-color: var(--color-cyan-300);
+  color: var(--color-blue-900);
+}
+.btn-s {
+}
 .timer-container {
   position: relative;
-  width: 200px;
-  height: 200px;
-}
+  width: 410px;
+  height: 410px;
+  border-radius: 50%; /* This will now work! */
 
+  /* 1. Create a transparent border to make space for the gradient */
+  border: 20px solid transparent;
+
+  /* 2. Layer 1: Solid background (clipped to the content)
+        Layer 2: Gradient background (clipped to the border area) */
+  background-image:
+    linear-gradient(var(--color-blue-950), var(--color-blue-950)),
+    linear-gradient(100deg, var(--gradient-1-end), var(--gradient-1-start));
+
+  /* 3. The magic trick: */
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  /* 4. Your existing shadow */
+  box-shadow: -16px -16px 30px rgba(255, 255, 255, 0.05);
+
+  /* Required for the SVG positioning inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .timer-svg {
   transform: rotate(-90deg); /* Rotates so it starts at the top */
 }
@@ -102,13 +191,8 @@ circle {
 }
 
 .bg {
-  stroke: #252839; /* Dark background ring color */
+  stroke: var(--color-blue-950); /* Dark background ring color */
 }
-.surrond {
-  stroke: #ff7e71; /* The coral color from your image */
-  stroke-width: 8;
-}
-
 .progress {
   stroke: #ff7e71; /* The coral color from your image */
   stroke-linecap: round;

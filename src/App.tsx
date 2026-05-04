@@ -1,20 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import "./style.css";
 import Home from "./pages/Home";
-import Page2 from "./pages/Page2";
-import Page3 from "./pages/Page3";
 import NotFound from "./pages/notFound";
+import Layout from "./Layout"; // Import your new layout
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/page2" element={<Page2 />} />
-        <Route path="/page3" element={<Page3 />} />
+    <Routes>
+      {/* The Layout wraps all child routes */}
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 
