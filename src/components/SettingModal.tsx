@@ -7,13 +7,21 @@ const SettingsModal = () => {
   const setColor = context?.setColor || (() => {});
   const setFont = context?.setFont || (() => {});
   const setBreakTimes = context?.setBreakTimes || (() => {});
-
-  let tcolor = "Cyan";
-  let tfont = "font-m";
-  let tbreak = {
+  const color = context?.color;
+  console.log(context);
+  const font = context?.font;
+  const breakTimes = context?.breakTimes || {
     pomodoro: 25,
     short: 5,
     long: 15,
+  };
+
+  let tcolor = color;
+  let tfont = font;
+  let tbreak = {
+    pomodoro: breakTimes.pomodoro,
+    short: breakTimes.short,
+    long: breakTimes.long,
   };
   // Re-run if color changes
   return (
@@ -34,7 +42,7 @@ const SettingsModal = () => {
               <label>pomodoro</label>
               <input
                 type="number"
-                defaultValue={25}
+                defaultValue={breakTimes.pomodoro}
                 min={1}
                 onChange={(e) => {
                   tbreak = { ...tbreak, pomodoro: +e.target.value };
@@ -45,7 +53,7 @@ const SettingsModal = () => {
               <label>short break</label>
               <input
                 type="number"
-                defaultValue={5}
+                defaultValue={breakTimes.short}
                 min={1}
                 onChange={(e) => {
                   tbreak = { ...tbreak, short: +e.target.value };
@@ -56,7 +64,7 @@ const SettingsModal = () => {
               <label>long break</label>
               <input
                 type="number"
-                defaultValue={15}
+                defaultValue={breakTimes.long}
                 min={1}
                 onChange={(e) => {
                   tbreak = { ...tbreak, long: +e.target.value };
