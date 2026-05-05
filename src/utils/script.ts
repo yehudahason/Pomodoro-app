@@ -17,15 +17,25 @@ function setProgress(percent: number) {
   circle.style.strokeDashoffset = String(offset);
 }
 
-export function run(minutes: number) {
-  const timeEl: HTMLElement | null = document.querySelector("#time-display h1");
+// 1. Store the controller outside the function scope
+let currentTimerController: AbortController | null = null;
 
-  // 1. Calculate total seconds immediately
+export function run(minutes: number) {
+  // 2. If a previous run exists, cancel it immediately
+  if (currentTimerController) {
+    currentTimerController.abort();
+    setProgress(100);
+  }
+
+  // 3. Create a new controller for this specific run
+  currentTimerController = new AbortController();
+  const { signal } = currentTimerController;
+
+  const timeEl: HTMLElement | null = document.querySelector("#time-display h1");
   let totalSeconds = minutes * 60;
   const decrementAmount = 100 / totalSeconds;
   let currentPercent = 100;
 
-  // Function to update the UI
   const updateUI = (totalSecs: number) => {
     if (!timeEl) return;
     const m = Math.floor(totalSecs / 60);
@@ -33,16 +43,22 @@ export function run(minutes: number) {
     timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
   };
 
-  // Initial display call
   updateUI(totalSeconds);
 
   const interval = setInterval(() => {
+    // 4. Check if this specific run was aborted
+    if (signal.aborted) {
+      clearInterval(interval);
+      return;
+    }
+
     totalSeconds--;
     currentPercent -= decrementAmount;
 
     if (totalSeconds <= 0) {
       updateUI(0);
       setProgress(0);
+      setProgress(100);
       clearInterval(interval);
       return;
     }
@@ -50,4 +66,9 @@ export function run(minutes: number) {
     updateUI(totalSeconds);
     setProgress(currentPercent);
   }, 1000);
+
+  // 5. Cleanup listener
+  signal.addEventListener("abort", () => clearInterval(interval), {
+    once: true,
+  });
 }

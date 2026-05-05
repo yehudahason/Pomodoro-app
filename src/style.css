@@ -147,11 +147,17 @@ ul {
   font-weight: bold;
   background: transparent;
 }
-.btn-p {
+.btn.cyan.active {
   background-color: var(--color-cyan-300);
   color: var(--color-blue-900);
 }
-.btn-s {
+.btn.red.active {
+  background-color: var(--color-red-400);
+  color: var(--color-blue-900);
+}
+.btn.purple.active {
+  background-color: var(--color-purple-400);
+  color: var(--color-blue-900);
 }
 .timer-container {
   position: relative;

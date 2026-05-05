@@ -1,6 +1,24 @@
 import { Outlet } from "react-router-dom";
+import { run } from "./utils/script";
+import { useState, useContext } from "react";
+import type { Mode } from "./types/types";
+import { ThemeContext } from "./ThemeProvider";
+
+// Define the modes for better type safety
 
 const Layout = () => {
+  const [activeMode, setActiveMode] = useState<Mode>("pomodoro");
+  const context = useContext(ThemeContext);
+  const color = context?.color || "Cyan";
+
+  const handleModeChange = (mode: Mode, time: number) => {
+    // 1. Update the UI state
+    setActiveMode(mode);
+
+    // 2. Trigger the timer logic (which now handles its own AbortController)
+    run(time);
+  };
+
   return (
     <div className="app-wrapper">
       <header>
@@ -8,18 +26,30 @@ const Layout = () => {
         <nav>
           <ul>
             <li>
-              <button type="button" className="btn btn-p">
+              <button
+                type="button"
+                className={`btn ${color.toLowerCase()} ${activeMode === "pomodoro" ? "active" : ""}`}
+                onClick={() => handleModeChange("pomodoro", 25)}
+              >
                 pomodoro
               </button>
             </li>
             <li>
-              <button type="button" className="btn btn-s">
-                short Break
+              <button
+                type="button"
+                className={`btn ${color.toLowerCase()} ${activeMode === "short" ? "active" : ""}`}
+                onClick={() => handleModeChange("short", 1)}
+              >
+                short break
               </button>
             </li>
             <li>
-              <button type="button" className="btn btn-l">
-                long Break
+              <button
+                type="button"
+                className={`btn ${color.toLowerCase()} ${activeMode === "long" ? "active" : ""}`}
+                onClick={() => handleModeChange("long", 5)}
+              >
+                long break
               </button>
             </li>
           </ul>
@@ -27,7 +57,6 @@ const Layout = () => {
       </header>
 
       <main>
-        {/* Your Home or NotFound pages will render here */}
         <Outlet />
       </main>
 
