@@ -1,24 +1,27 @@
-import { useContext, useLayoutEffect } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../ThemeProvider";
+const baseUrl = import.meta.env.BASE_URL;
 
 const SettingsModal = () => {
   const context = useContext(ThemeContext);
-  const color = context?.color || "Cyan";
-  const font = context?.font || "font-p";
+  const setColor = context?.setColor || (() => {});
+  const setFont = context?.setFont || (() => {});
+  const setBreakTimes = context?.setBreakTimes || (() => {});
+
+  let tcolor = "Cyan";
+  let tfont = "font-m";
+  let tbreak = {
+    pomodoro: 25,
+    short: 5,
+    long: 15,
+  };
   // Re-run if color changes
   return (
     <div className="settings-modal">
       <header>
         <h2>Settings</h2>
         <button aria-label="Close">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14">
-            <path
-              fill="#1E213F"
-              fillRule="evenodd"
-              d="M11.95.636l1.414 1.414L8.414 7l4.95 4.95-1.414 1.414L7 8.414l-4.95 4.95L.636 11.95 5.586 7 .636 2.05 2.05.636 7 5.586l4.95-4.95z"
-              opacity=".5"
-            />
-          </svg>
+          <img src={`${baseUrl}/assets/icon-close.svg`} alt="close" />
         </button>
       </header>
 
@@ -29,15 +32,36 @@ const SettingsModal = () => {
           <div className="time-inputs">
             <div className="input-group">
               <label>pomodoro</label>
-              <input type="number" defaultValue={25} min={1} />
+              <input
+                type="number"
+                defaultValue={25}
+                min={1}
+                onChange={(e) => {
+                  tbreak = { ...tbreak, pomodoro: +e.target.value };
+                }}
+              />
             </div>
             <div className="input-group">
               <label>short break</label>
-              <input type="number" defaultValue={5} min={1} />
+              <input
+                type="number"
+                defaultValue={5}
+                min={1}
+                onChange={(e) => {
+                  tbreak = { ...tbreak, short: +e.target.value };
+                }}
+              />
             </div>
             <div className="input-group">
               <label>long break</label>
-              <input type="number" defaultValue={15} min={1} />
+              <input
+                type="number"
+                defaultValue={15}
+                min={1}
+                onChange={(e) => {
+                  tbreak = { ...tbreak, long: +e.target.value };
+                }}
+              />
             </div>
           </div>
         </section>
@@ -46,9 +70,27 @@ const SettingsModal = () => {
         <section className="selection-row">
           <h3>Font</h3>
           <div className="radio-group">
-            <button className="active">Aa</button>
-            <button>Aa</button>
-            <button>Aa</button>
+            <button
+              type="button"
+              className="color-btn active"
+              onClick={(_) => (tfont = "font-p")}
+            >
+              Aa
+            </button>
+            <button
+              type="button"
+              className="color-btn"
+              onClick={(_) => (tfont = "font-s")}
+            >
+              Aa
+            </button>
+            <button
+              type="button"
+              className="color-btn"
+              onClick={(_) => (tfont = "font-m")}
+            >
+              Aa
+            </button>
           </div>
         </section>
 
@@ -66,13 +108,37 @@ const SettingsModal = () => {
                 />
               </svg>
             </button>
-            <button className="color-cyan"></button>
-            <button className="color-purple"></button>
+            <button className="color-cyan" onClick={(_) => (tcolor = "Cyan")}>
+              Cyan
+            </button>
+            <button
+              type="button"
+              className="color-red"
+              onClick={(_) => (tcolor = "Red")}
+            >
+              Red
+            </button>
+            <button
+              type="button"
+              className="color-purple"
+              onClick={(_) => (tcolor = "Purple")}
+            >
+              Purple
+            </button>
           </div>
         </section>
       </div>
 
-      <button className="btn-apply">Apply</button>
+      <button
+        className="btn-apply"
+        onClick={() => {
+          setColor(tcolor);
+          setFont(tfont);
+          setBreakTimes(tbreak);
+        }}
+      >
+        Apply
+      </button>
     </div>
   );
 };

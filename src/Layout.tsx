@@ -14,6 +14,11 @@ const Layout = () => {
   const font = context?.font || "font-m";
   const showSetting = context?.showSetting || false;
   const setShowSetting = context?.setShowSetting || (() => {});
+  const breakTimes = context?.breakTimes || {
+    pomodoro: 25,
+    short: 5,
+    long: 15,
+  };
 
   const handleModeChange = (mode: Mode, time: number) => {
     // 1. Update the UI state
@@ -37,7 +42,9 @@ const Layout = () => {
               <button
                 type="button"
                 className={`btn ${color.toLowerCase()} ${activeMode === "pomodoro" ? "active" : ""}`}
-                onClick={() => handleModeChange("pomodoro", 25)}
+                onClick={() =>
+                  handleModeChange("pomodoro", breakTimes.pomodoro)
+                }
               >
                 pomodoro
               </button>
@@ -46,7 +53,7 @@ const Layout = () => {
               <button
                 type="button"
                 className={`btn ${color.toLowerCase()} ${activeMode === "short" ? "active" : ""}`}
-                onClick={() => handleModeChange("short", 1)}
+                onClick={() => handleModeChange("short", breakTimes.short)}
               >
                 short break
               </button>
@@ -55,7 +62,7 @@ const Layout = () => {
               <button
                 type="button"
                 className={`btn ${color.toLowerCase()} ${activeMode === "long" ? "active" : ""}`}
-                onClick={() => handleModeChange("long", 5)}
+                onClick={() => handleModeChange("long", breakTimes.long)}
               >
                 long break
               </button>
