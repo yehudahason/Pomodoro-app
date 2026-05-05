@@ -4,11 +4,11 @@ import { run } from "../utils/script";
 import Timer from "../components/Timer";
 import SettingsModal from "../components/SettingModal";
 
-const showSetting = false;
 const Home = ({}) => {
   const context = useContext(ThemeContext);
   const color = context?.color || "Cyan";
-  const setColor = context?.setColor || (() => {});
+  const showSetting = context?.showSetting || false;
+  console.log(showSetting);
   useEffect(() => {
     run(0.3);
   }, []);

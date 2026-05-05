@@ -1,4 +1,11 @@
+import { useContext, useLayoutEffect } from "react";
+import { ThemeContext } from "../ThemeProvider";
+
 const SettingsModal = () => {
+  const context = useContext(ThemeContext);
+  const color = context?.color || "Cyan";
+  const font = context?.font || "font-p";
+  // Re-run if color changes
   return (
     <div className="settings-modal">
       <header>

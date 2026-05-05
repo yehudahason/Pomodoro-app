@@ -1,15 +1,19 @@
 import { Outlet } from "react-router-dom";
 import { run } from "./utils/script";
-import { useState, useContext } from "react";
+import { useState, useContext, useLayoutEffect } from "react";
 import type { Mode } from "./types/types";
 import { ThemeContext } from "./ThemeProvider";
 
 // Define the modes for better type safety
+const baseUrl = import.meta.env.BASE_URL;
 
 const Layout = () => {
   const [activeMode, setActiveMode] = useState<Mode>("pomodoro");
   const context = useContext(ThemeContext);
   const color = context?.color || "Cyan";
+  const font = context?.font || "font-m";
+  const showSetting = context?.showSetting || false;
+  const setShowSetting = context?.setShowSetting || (() => {});
 
   const handleModeChange = (mode: Mode, time: number) => {
     // 1. Update the UI state
@@ -19,6 +23,10 @@ const Layout = () => {
     run(time);
   };
 
+  useLayoutEffect(() => {
+    // Update the body background based on the context color
+    document.body.className = font.toLowerCase();
+  }, [font]);
   return (
     <div className="app-wrapper">
       <header>
@@ -61,6 +69,13 @@ const Layout = () => {
       </main>
 
       <footer>
+        <div className="setting-btn">
+          <img
+            src={`${baseUrl}/assets/icon-settings.svg`}
+            alt=""
+            onClick={() => setShowSetting(!showSetting)}
+          />
+        </div>
         <p>© 2026 My SPA</p>
       </footer>
     </div>
