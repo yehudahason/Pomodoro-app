@@ -26,7 +26,8 @@ let updateUI = (totalSecs: number) => {
   timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
 };
 
-export function run(minutes: number) {
+export function start(minutes: number) {
+  console.log(minutes);
   // 2. If a previous run exists, cancel it immediately
   if (currentTimerController) {
     currentTimerController.abort();
@@ -79,5 +80,3 @@ export function setStart(minutes: number) {
 export function stop() {
   currentTimerController?.abort();
 }
-
-//

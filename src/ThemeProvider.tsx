@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Color, Font, BreakTimes } from "./types/types";
+import type { Color, Font, BreakTimes, Mode } from "./types/types";
 
 import { createContext } from "react";
 export const ThemeContext = createContext<{
@@ -11,9 +11,12 @@ export const ThemeContext = createContext<{
   setShowSetting: Function;
   breakTimes: BreakTimes;
   setBreakTimes: Function;
+  mode: Mode;
+  setMode: Function;
 } | null>(null);
 export function ThemeProvider({ children }: { children: any }) {
   const [color, setColor] = useState<Color>("Cyan");
+  const [mode, setMode] = useState<Mode>("pomodoro");
   const [font, setFont] = useState<Font>("font-m");
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [breakTimes, setBreakTimes] = useState<BreakTimes>({
@@ -33,6 +36,8 @@ export function ThemeProvider({ children }: { children: any }) {
         setShowSetting,
         breakTimes,
         setBreakTimes,
+        mode,
+        setMode,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../ThemeProvider";
 import type { Color, Font, BreakTimes, Mode } from "../types/types";
+import { setStart, stop } from "../utils/script";
 const baseUrl = import.meta.env.BASE_URL;
 
 const SettingsModal = () => {
@@ -10,6 +11,10 @@ const SettingsModal = () => {
     short: context?.breakTimes?.short || 5,
     long: context?.breakTimes?.long || 15,
   });
+  const show = context?.showSetting || false;
+  const setMode = context?.setMode || (() => {});
+  console.log(show);
+  const setShowSetting = context?.setShowSetting || (() => {});
   const [tfont, tsetFont] = useState<Font>(context?.font || "font-m");
   const [tcolor, tsetColor] = useState<Color>(context?.color || "Cyan");
 
@@ -33,11 +38,15 @@ const SettingsModal = () => {
   }, [tcolor]);
 
   return (
-    <div className="settings-modal">
+    <div className={`settings-modal ${show ? "show" : ""}`}>
       <header>
         <h2>Settings</h2>
         <button aria-label="Close">
-          <img src={`${baseUrl}/assets/icon-close.svg`} alt="close" />
+          <img
+            src={`${baseUrl}/assets/icon-close.svg`}
+            alt="close"
+            onClick={() => setShowSetting(false)}
+          />
         </button>
       </header>
 
@@ -189,6 +198,10 @@ const SettingsModal = () => {
           setColor(tcolor);
           setFont(tfont);
           setBreakTimes(tbreak);
+          setMode("pomodoro");
+          stop();
+          setStart(tbreak.pomodoro);
+          setShowSetting(false);
         }}
       >
         Apply

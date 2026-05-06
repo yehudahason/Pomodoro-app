@@ -216,6 +216,15 @@ circle {
   stroke-dasharray: 559.203;
   stroke-dashoffset: 559.203; /* Change this value to decrease/increase the gap */
 }
+.progress.red {
+  stroke: var(--color-red-400);
+}
+.progress.purple {
+  stroke: var(--color-purple-400);
+}
+.progress.cyan {
+  stroke: var(--color-cyan-300);
+}
 
 #time-display {
   position: absolute;
@@ -246,20 +255,27 @@ circle {
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
 }
 .settings-modal {
+  display: flex;
+  visibility: hidden;
   background-color: white;
   border-radius: 1rem;
   padding: 1rem 0;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
   flex-direction: column;
   align-items: center;
   min-height: auto;
   z-index: 100;
+  transition: scale 0.2s linear;
+}
+.settings-modal.show {
+  visibility: visible;
+  scale: 1.05;
 }
 .settings-modal header {
   width: 100%;
@@ -289,6 +305,28 @@ circle {
   color: var(--color-blue-900);
   margin-bottom: 1rem;
   text-transform: uppercase;
+}
+.setting-content {
+  position: relative;
+}
+.btn-apply {
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  background-color: var(--color-red-400);
+  color: var(--color-white);
+  font-size: var(--fs-p3-d);
+  line-height: var(--lh-p3-d);
+  letter-spacing: var(--ls-p3-d);
+  font-weight: bold;
+  border-radius: 10rem;
+  cursor: pointer;
 }
 .section1 {
   padding: 2rem 0;
