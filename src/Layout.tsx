@@ -39,7 +39,7 @@ const Layout = () => {
     setStart(breakTimes.pomodoro);
   }, []);
   return (
-    <div className="app-wrapper">
+    <div className={`app-wrapper ${showSetting ? "show" : ""}`}>
       <header>
         <h1>Pomodoro</h1>
         <nav>

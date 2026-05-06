@@ -119,6 +119,9 @@ body.font-m {
   overflow-x: hidden;
   justify-content: center;
 }
+button:hover {
+  cursor: pointer;
+}
 .app-wrapper {
   display: flex;
   flex-direction: column;
@@ -130,6 +133,10 @@ body.font-m {
   padding: 1rem;
   min-height: auto;
   padding: 3rem;
+}
+.app-wrapper.show {
+  visibility: hidden;
+  height: 100vh;
 }
 .app-wrapper h1 {
   text-align: center;
@@ -261,7 +268,7 @@ circle {
   padding: 0;
 }
 #time-display p {
-  font-size: var(--fs-p2-d);
+  font-size: 1.6rem;
   line-height: var(--lh-p2-d);
   letter-spacing: var(--ls-p2-d);
   color: var(--color-grey-400);
@@ -277,7 +284,7 @@ circle {
   border-radius: 1rem;
   padding: 1rem 0;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   flex-direction: column;
@@ -479,7 +486,10 @@ input[type="number"] {
   padding: 1.25rem;
   border-radius: 50%;
 }
-
+.color-group button:hover,
+.color-group img:hover {
+  cursor: pointer;
+}
 .color-group button.red {
   background-color: var(--color-red-400);
 }
@@ -514,11 +524,19 @@ footer {
   gap: 1rem;
 }
 @media (max-width: 570px) {
+  .timer-container {
+    border: 12px solid transparent;
+  }
   #time-display h1 {
-    font-size: 4rem;
+    font-size: 3rem;
+    line-height: var(--lh-p1-s);
+    letter-spacing: var(--ls-p1-s);
   }
   .settings-content {
     min-width: 310px;
+  }
+  #time-display p {
+    font-size: 1.2rem;
   }
   .section1 h3 {
     text-align: center;
@@ -527,6 +545,7 @@ footer {
     margin: 0;
     padding: 1rem 0;
   }
+
   ul {
     gap: 0.2rem;
   }
@@ -538,11 +557,11 @@ footer {
     padding: 0;
   }
   .btn {
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.8rem;
     font-size: 12px;
   }
   .timer-container {
-    width: min(410px, 90vw);
+    width: min(410px, 66vw);
     height: auto;
   }
 
@@ -565,6 +584,7 @@ footer {
   .color-group {
     gap: 1.2rem;
   }
+
   .settings-modal.show {
     scale: 1;
   }
@@ -587,5 +607,22 @@ footer {
   .color-group img.Red {
     top: 0.5rem;
     right: 4.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  #time-display h1 {
+    font-size: var(--fs-p1-s);
+  }
+  #time-display p {
+    font-size: var(--fs-p2-m);
+    line-height: var(--lh-p2-m);
+    letter-spacing: var(--ls-p2-m);
+    text-align: center;
+    padding: 0.8rem 0 0 0.8rem;
+  }
+  .btn {
+    padding: 0.6rem 0.4rem;
+    font-size: 14px;
   }
 }
