@@ -16,4 +16,4 @@ This is a solution to the [Pomodoro app challenge on Frontend Mentor](https://ww
 
 ## Author
 
-- Frontend Mentor - [@Yehuda Hason](https://www.frontendmentor.io/profile/yehudahason)
+- Frontend Mentor - [Yehuda Hason](https://www.frontendmentor.io/profile/yehudahason)

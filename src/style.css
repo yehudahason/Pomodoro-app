@@ -205,6 +205,12 @@ ul {
 .timer-svg {
   transform: rotate(-90deg); /* Rotates so it starts at the top */
 }
+.svg-icon {
+  filter: brightness(0) opacity(0.4);
+}
+.svg-icon:hover {
+  filter: brightness(0);
+}
 
 circle {
   fill: none;
@@ -271,7 +277,7 @@ circle {
   border-radius: 1rem;
   padding: 1rem 0;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   flex-direction: column;
@@ -572,10 +578,14 @@ footer {
     width: 8rem;
   }
   .section1 {
-    padding: 2rem 0;
+    padding: 1rem 0;
     margin: 0.8rem;
   }
   .input-group label {
     width: 7rem;
+  }
+  .color-group img.Red {
+    top: 0.5rem;
+    right: 4.2rem;
   }
 }

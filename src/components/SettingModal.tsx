@@ -3,7 +3,8 @@ import { ThemeContext } from "../ThemeProvider";
 import type { Color, Font, BreakTimes, Mode } from "../types/types";
 import { setStart, stop } from "../utils/script";
 const baseUrl = import.meta.env.BASE_URL;
-
+import ArrowUp from "../components/ArrowUP.svg";
+import ArrowDown from "../components/ArrowDown.svg";
 const SettingsModal = () => {
   const context = useContext(ThemeContext);
   let [tbreak, tsetBreak] = useState<BreakTimes>({
@@ -37,9 +38,9 @@ const SettingsModal = () => {
     <div className={`settings-modal ${show ? "show" : ""}`}>
       <header>
         <h2>Settings</h2>
-        <button aria-label="Close">
+        <button className="close" aria-label="Close">
           <img
-            src={`${baseUrl}/assets/icon-close.svg`}
+            src={`${baseUrl}/assets/close.svg`}
             alt="close"
             onClick={() => setShowSetting(false)}
           />
@@ -66,16 +67,13 @@ const SettingsModal = () => {
                   className="arrow up"
                   onClick={(_) => stepUp("pomodoro")}
                 >
-                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                  <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
                   className="arrow down"
                   onClick={(_) => stepDown("pomodoro")}
                 >
-                  <img
-                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
-                    alt="down"
-                  />
+                  <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
             </div>
@@ -91,16 +89,13 @@ const SettingsModal = () => {
               />
               <div className="arrow-container">
                 <button className="arrow up" onClick={(_) => stepUp("short")}>
-                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                  <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
                   className="arrow down"
                   onClick={(_) => stepDown("short")}
                 >
-                  <img
-                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
-                    alt="down"
-                  />
+                  <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
             </div>
@@ -116,16 +111,13 @@ const SettingsModal = () => {
               />
               <div className="arrow-container">
                 <button className="arrow up" onClick={(_) => stepUp("long")}>
-                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                  <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
                   className="arrow down"
                   onClick={(_) => stepDown("long")}
                 >
-                  <img
-                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
-                    alt="down"
-                  />
+                  <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
             </div>
