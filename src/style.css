@@ -473,6 +473,7 @@ input[type="number"] {
   background-color: var(--color-grey-100);
   color: var(--color-grey-400);
   cursor: pointer;
+  font-weight: 600;
 }
 .font-group button.active {
   background-color: var(--color-blue-900);
