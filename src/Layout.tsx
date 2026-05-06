@@ -1,12 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { start, setStart, stop } from "./utils/script";
-import {
-  useState,
-  useContext,
-  useLayoutEffect,
-  useMemo,
-  useEffect,
-} from "react";
+import { setStart, stop } from "./utils/script";
+import { useContext, useLayoutEffect, useEffect } from "react";
 import type { Mode } from "./types/types";
 import { ThemeContext } from "./ThemeProvider";
 
@@ -27,9 +21,6 @@ const Layout = () => {
     long: 15,
   };
 
-  useMemo(() => {
-    console.log(breakTimes);
-  }, [breakTimes]);
   const handleModeChange = (mode: Mode) => {
     // 1. Update the UI state
     setMode(mode);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeProvider";
 import type { Color, Font, BreakTimes, Mode } from "../types/types";
 import { setStart, stop } from "../utils/script";
@@ -32,10 +32,6 @@ const SettingsModal = () => {
   function stepDown(which: Mode) {
     tsetBreak({ ...tbreak, [which]: tbreak[which] - 1 });
   }
-
-  useEffect(() => {
-    console.log(tcolor);
-  }, [tcolor]);
 
   return (
     <div className={`settings-modal ${show ? "show" : ""}`}>

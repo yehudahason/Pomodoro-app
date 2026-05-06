@@ -1,6 +1,6 @@
 import { useState, useContext, useMemo } from "react";
 import { ThemeContext } from "../ThemeProvider";
-import { start, stop, setStart } from "../utils/script";
+import { start, stop } from "../utils/script";
 
 export default function Timer() {
   const [runing, setRuning] = useState<boolean>(false);
