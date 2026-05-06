@@ -189,7 +189,7 @@ ul {
   position: relative;
   width: 410px;
   height: 410px;
-  border-radius: 50%; /* This will now work! */
+  border-radius: 50%;
 
   /* 1. Create a transparent border to make space for the gradient */
   border: 20px solid transparent;
@@ -231,11 +231,11 @@ circle {
   stroke: var(--color-blue-950); /* Dark background ring color */
 }
 .progress {
-  stroke: #ff7e71; /* The coral color from your image */
+  stroke: var(--color-red-400); /* The coral color from your image */
   stroke-linecap: round;
 
   /* This is the magic: 
-     Circumference = 2 * π * r (2 * 3.14 * 45 ≈ 283) */
+     Circumference = 2 * π * r (2 * 3.14 * 89 ≈ 560) */
   stroke-dasharray: 559.203;
   stroke-dashoffset: 559.203; /* Change this value to decrease/increase the gap */
 }
@@ -293,7 +293,7 @@ circle {
 .settings-modal {
   display: flex;
   visibility: hidden;
-  background-color: white;
+  background-color: var(--color-white);
   border-radius: 1rem;
   padding: 1rem 0;
   position: absolute;
@@ -477,7 +477,7 @@ input[type="number"] {
 }
 .font-group button.active {
   background-color: var(--color-blue-900);
-  color: white;
+  color: var(--color-white);
   transform: scale(1.1);
 }
 
@@ -540,7 +540,7 @@ footer {
   justify-content: center;
   gap: 1rem;
 }
-@media (max-width: 570px) {
+@media (max-width: 36rem) {
   .timer-container {
     border: 12px solid transparent;
   }
@@ -627,7 +627,7 @@ footer {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 25rem) {
   #time-display h1 {
     font-size: var(--fs-p1-s);
   }
@@ -640,6 +640,6 @@ footer {
   }
   .btn {
     padding: 0.6rem 0.4rem;
-    font-size: 14px;
+    font-size: 0.8rem;
   }
 }

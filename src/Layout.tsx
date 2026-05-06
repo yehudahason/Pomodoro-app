@@ -5,7 +5,6 @@ import type { Mode } from "./types/types";
 import { ThemeContext } from "./ThemeProvider";
 import Footer from "./components/Footer";
 
-// Define the modes for better type safety
 const baseUrl = import.meta.env.BASE_URL;
 
 const Layout = () => {
@@ -26,7 +25,6 @@ const Layout = () => {
     // 1. Update the UI state
     setMode(mode);
     setStart(breakTimes[mode]);
-    // 2. Trigger the timer logic (which now handles its own AbortController)
     stop();
   };
   useLayoutEffect(() => {

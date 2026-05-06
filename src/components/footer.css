@@ -28,28 +28,6 @@
   opacity: 0.6;
 }
 
-/* Year flicker effect */
-.year {
-  margin-left: 0.5rem;
-  font-weight: 600;
-  display: inline-block;
-  animation: flicker 1s step-end infinite;
-  color: rgb(219, 89, 42);
-}
-
-/* Flicker animation */
-@keyframes flicker {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .attribution {

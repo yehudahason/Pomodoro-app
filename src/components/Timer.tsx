@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../ThemeProvider";
 import { pause, start, stop } from "../utils/script";
+import type { KeyboardEvent } from "react";
 let restartVar = false;
 
 export function handleRestart() {
@@ -9,16 +10,19 @@ export function handleRestart() {
 export default function Timer() {
   const context = useContext(ThemeContext);
   const color = context?.color || "Cyan";
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [needsRestart, setNeedsRestart] = useState<boolean>(false);
   const breakTimes = context?.breakTimes || {
     pomodoro: 25,
     short: 5,
     long: 15,
   };
-
   const mode = context?.mode || "pomodoro";
-
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [needsRestart, setNeedsRestart] = useState<boolean>(false);
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleChange();
+    }
+  };
   // 1. Monitor the external variable
   useEffect(() => {
     const timer = setInterval(() => {
@@ -63,7 +67,12 @@ export default function Timer() {
       </svg>
       <div id="time-display">
         <h1></h1>
-        <p onClick={handleChange} className={color.toLowerCase()}>
+        <p
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          onClick={handleChange}
+          className={color.toLowerCase()}
+        >
           {isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}
         </p>
       </div>

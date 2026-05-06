@@ -2,8 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./style.css";
 import Home from "./pages/Home";
 import NotFound from "./pages/notFound";
-import Layout from "./Layout"; // Import your new layout
-
+import Layout from "./Layout";
 import { ThemeProvider } from "./ThemeProvider";
 
 function App() {

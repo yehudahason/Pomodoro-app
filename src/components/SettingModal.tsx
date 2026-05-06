@@ -2,9 +2,10 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeProvider";
 import type { Color, Font, BreakTimes, Mode } from "../types/types";
 import { setStart, stop } from "../utils/script";
-const baseUrl = import.meta.env.BASE_URL;
 import ArrowUp from "../components/ArrowUP.svg";
 import ArrowDown from "../components/ArrowDown.svg";
+const baseUrl = import.meta.env.BASE_URL;
+
 const SettingsModal = () => {
   const context = useContext(ThemeContext);
   let [tbreak, tsetBreak] = useState<BreakTimes>({
@@ -14,15 +15,13 @@ const SettingsModal = () => {
   });
   const show = context?.showSetting || false;
   const setMode = context?.setMode || (() => {});
-  console.log(show);
   const setShowSetting = context?.setShowSetting || (() => {});
-  const [tfont, tsetFont] = useState<Font>(context?.font || "font-m");
-  const [tcolor, tsetColor] = useState<Color>(context?.color || "Cyan");
-
   const setColor = context?.setColor || (() => {});
   const setFont = context?.setFont || (() => {});
   const setBreakTimes = context?.setBreakTimes || (() => {});
 
+  const [tfont, tsetFont] = useState<Font>(context?.font || "font-m");
+  const [tcolor, tsetColor] = useState<Color>(context?.color || "Cyan");
   // Re-run if color changes
   function stepUp(which: Mode) {
     if (tbreak[which] >= 60) {
@@ -44,7 +43,7 @@ const SettingsModal = () => {
     <div className={`settings-modal ${show ? "show" : ""}`}>
       <header>
         <h2>Settings</h2>
-        <button className="close" aria-label="Close">
+        <button type="button" className="close" aria-label="Close">
           <img
             src={`${baseUrl}/assets/close.svg`}
             alt="close"
@@ -58,9 +57,10 @@ const SettingsModal = () => {
         <section className="section1">
           <h3>Time (Minutes)</h3>
           <div className="time-inputs">
-            <div className="input-group">
-              <label>pomodoro</label>
+            <form className="input-group">
+              <label htmlFor="pomodoro">pomodoro</label>
               <input
+                id="pomodoro"
                 type="number"
                 value={tbreak.pomodoro}
                 min={1}
@@ -71,25 +71,35 @@ const SettingsModal = () => {
                     tsetBreak({ ...tbreak, pomodoro: val });
                   }
                 }}
-              />
+              />{" "}
               <div className="arrow-container">
                 <button
+                  type="button"
                   className="arrow up"
-                  onClick={(_) => stepUp("pomodoro")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepUp("pomodoro");
+                  }}
                 >
                   <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
+                  type="button"
                   className="arrow down"
-                  onClick={(_) => stepDown("pomodoro")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepDown("pomodoro");
+                  }}
                 >
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </div>
-            <div className="input-group">
-              <label>short break</label>
+            </form>
+
+            <form className="input-group">
+              <label htmlFor="short">short break</label>
               <input
+                id="short"
                 type="number"
                 value={tbreak.short}
                 min={1}
@@ -102,20 +112,32 @@ const SettingsModal = () => {
                 }}
               />
               <div className="arrow-container">
-                <button className="arrow up" onClick={(_) => stepUp("short")}>
+                <button
+                  type="button"
+                  className="arrow up"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepUp("short");
+                  }}
+                >
                   <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
+                  type="button"
                   className="arrow down"
-                  onClick={(_) => stepDown("short")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepDown("short");
+                  }}
                 >
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </div>
-            <div className="input-group">
-              <label>long break</label>
+            </form>
+            <form className="input-group">
+              <label htmlFor="long">long break</label>
               <input
+                id="long"
                 type="number"
                 value={tbreak.long}
                 min={1}
@@ -128,17 +150,28 @@ const SettingsModal = () => {
                 }}
               />
               <div className="arrow-container">
-                <button className="arrow up" onClick={(_) => stepUp("long")}>
+                <button
+                  type="button"
+                  className="arrow up"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepUp("long");
+                  }}
+                >
                   <img className="svg-icon" src={ArrowUp} alt="up" />
                 </button>
                 <button
+                  type="button"
                   className="arrow down"
-                  onClick={(_) => stepDown("long")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    stepDown("long");
+                  }}
                 >
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </section>
 
@@ -181,6 +214,7 @@ const SettingsModal = () => {
             />
 
             <button
+              type="button"
               className="cyan"
               onClick={(_) => tsetColor("Cyan")}
             ></button>
@@ -199,6 +233,7 @@ const SettingsModal = () => {
       </div>
 
       <button
+        type="button"
         className="btn-apply"
         onClick={() => {
           setColor(tcolor);
