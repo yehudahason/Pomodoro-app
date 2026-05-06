@@ -17,7 +17,7 @@ export const ThemeContext = createContext<{
 export function ThemeProvider({ children }: { children: any }) {
   const [color, setColor] = useState<Color>("Cyan");
   const [mode, setMode] = useState<Mode>("pomodoro");
-  const [font, setFont] = useState<Font>("font-m");
+  const [font, setFont] = useState<Font>("font-p");
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [breakTimes, setBreakTimes] = useState<BreakTimes>({
     pomodoro: 25,

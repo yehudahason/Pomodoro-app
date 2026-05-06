@@ -63,7 +63,7 @@ export default function Timer() {
       </svg>
       <div id="time-display">
         <h1></h1>
-        <p onClick={handleChange}>
+        <p onClick={handleChange} className={color.toLowerCase()}>
           {isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}
         </p>
       </div>

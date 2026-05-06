@@ -279,6 +279,16 @@ circle {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+#time-display p.cyan:hover {
+  color: var(--color-cyan-300);
+}
+#time-display p.red:hover {
+  color: var(--color-red-400);
+}
+#time-display p.purple:hover {
+  color: var(--color-purple-400);
 }
 .settings-modal {
   display: flex;
@@ -395,7 +405,7 @@ input[type="number"] {
 }
 .arrow-container img {
   height: 0.4rem;
-  width: 0.8rem;
+  width: 1rem;
 }
 
 .time-inputs {
