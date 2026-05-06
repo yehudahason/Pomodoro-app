@@ -27,7 +27,7 @@ let updateUI = (totalSecs: number) => {
   if (!timeEl) return;
   const m = Math.floor(totalSecs / 60);
   const s = totalSecs % 60;
-  timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
+  timeEl.innerText = `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 };
 export function pause() {
   if (currentTimerController) {

@@ -166,9 +166,12 @@ ul {
   font-size: var(--fs-p3-d);
   line-height: var(--lh-p3-d);
   letter-spacing: var(--ls-p3-d);
-  color: var(--color-blue-100);
+  color: var(--color-grey-400);
   font-weight: bold;
   background: transparent;
+}
+.btn:hover {
+  color: var(--color-blue-100);
 }
 .btn.cyan.active {
   background-color: var(--color-cyan-300);
@@ -360,6 +363,9 @@ circle {
   min-height: auto;
 }
 
+.setting-btn img:hover {
+  cursor: pointer;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
