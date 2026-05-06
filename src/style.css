@@ -84,13 +84,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-family: var(--font-primary);
   font-weight: var(--fw-regular);
-  min-height: 100vh;
+  background-image: var(--gradient-main);
+  background-attachment: fixed;
 }
 body.font-p {
   font-family: var(--font-primary);
@@ -102,15 +111,13 @@ body.font-m {
   font-family: var(--font-mono);
 }
 #root {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: var(--gradient-main);
+  display: grid;
   overflow-x: hidden;
+  justify-content: center;
 }
 .app-wrapper {
   display: flex;
@@ -264,7 +271,7 @@ circle {
   border-radius: 1rem;
   padding: 1rem 0;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   flex-direction: column;
@@ -499,4 +506,76 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+@media (max-width: 570px) {
+  #time-display h1 {
+    font-size: 4rem;
+  }
+  .settings-content {
+    min-width: 310px;
+  }
+  .section1 h3 {
+    text-align: center;
+  }
+  .app-wrapper {
+    margin: 0;
+    padding: 1rem 0;
+  }
+  ul {
+    gap: 0.2rem;
+  }
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    padding: 0;
+  }
+  .btn {
+    padding: 1rem 0.5rem;
+    font-size: 12px;
+  }
+  .timer-container {
+    width: min(410px, 90vw);
+    height: auto;
+  }
+
+  .time-inputs {
+    flex-direction: column;
+  }
+
+  .arrow-container {
+    right: 2.5rem;
+    top: 0.4rem;
+  }
+  .selection-row {
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 0.8rem;
+  }
+  .font-group {
+    gap: 1.2rem;
+  }
+  .color-group {
+    gap: 1.2rem;
+  }
+  .settings-modal.show {
+    scale: 1;
+  }
+  .input-group {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  input[type="number"] {
+    width: 8rem;
+  }
+  .section1 {
+    padding: 2rem 0;
+    margin: 0.8rem;
+  }
+  .input-group label {
+    width: 7rem;
+  }
 }

@@ -3,6 +3,7 @@ import { setStart, stop } from "./utils/script";
 import { useContext, useLayoutEffect, useEffect } from "react";
 import type { Mode } from "./types/types";
 import { ThemeContext } from "./ThemeProvider";
+import Footer from "./components/Footer";
 
 // Define the modes for better type safety
 const baseUrl = import.meta.env.BASE_URL;
@@ -92,7 +93,7 @@ const Layout = () => {
             onClick={() => setShowSetting(!showSetting)}
           />
         </div>
-        <p>© 2026 My SPA</p>
+        <Footer />
       </footer>
     </div>
   );
