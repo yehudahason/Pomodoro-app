@@ -11,7 +11,7 @@
   --color-black: #000000;
 
   /* Grey Scale */
-  --color-grey-400: #bbbdcb;
+  --color-grey-400: #6e6e71;
   --color-grey-100: #e4e2e2; /* Estimated from visual in third image */
 
   /* Blue Scale */
@@ -248,9 +248,9 @@ circle {
   text-align: center;
 }
 .settings-modal {
-  background-color: var(--color-grey-100);
+  background-color: white;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1rem 0;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -259,7 +259,6 @@ circle {
   flex-direction: column;
   align-items: center;
   min-height: auto;
-  gap: 1rem;
   z-index: 100;
 }
 .settings-modal header {
@@ -267,19 +266,194 @@ circle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0;
   flex-direction: row;
+  border-bottom: 1px solid var(--color-grey-100);
 }
 .settings-modal header h2 {
   font-size: var(--fs-p1-s);
   line-height: var(--lh-p1-s);
   letter-spacing: var(--ls-p1-s);
   color: var(--color-blue-950);
+  padding-left: 2rem;
 }
 .settings-modal header button {
   background-color: transparent;
   border: none;
+  padding-right: 2rem;
 }
+.settings-modal h3 {
+  font-size: var(--fs-p3-d);
+  line-height: var(--lh-p3-d);
+  letter-spacing: 5px;
+  color: var(--color-blue-900);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.section1 {
+  padding: 2rem 0;
+  margin: 0 2rem;
+  border-bottom: 1px solid var(--color-grey-100);
+}
+.setting-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.arrow-container {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.arrow-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.arrow-container img {
+  height: 0.4rem;
+  width: 0.8rem;
+}
+
+.time-inputs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: var(--fs-p4-d);
+  line-height: var(--lh-p4-d);
+  letter-spacing: var(--ls-p4-d);
+  color: var(--color-grey-400);
+}
+
+input[type="number"] {
+  height: 3rem;
+  width: 8rem;
+  font-size: var(--fs-p3-d);
+  line-height: var(--lh-p3-d);
+  letter-spacing: var(--ls-p3-d);
+  color: var(--color-blue-850);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  background-color: var(--color-blue-50);
+  text-align: left;
+}
+
+.selection-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  margin: 0 2rem;
+  border-bottom: 1px solid var(--color-grey-100);
+}
+.selection-row h3 {
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-p3-d);
+  line-height: var(--lh-p3-d);
+  letter-spacing: var(--ls-p3-d);
+  color: var(--color-blue-900);
+}
+.font-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.font-group button {
+  border: none;
+  padding: 0.7rem;
+  border-radius: 50%;
+  background-color: var(--color-grey-100);
+  color: var(--color-grey-400);
+  cursor: pointer;
+}
+.font-group button.active {
+  background-color: var(--color-blue-900);
+  color: white;
+  transform: scale(1.1);
+}
+
+.font-group button.font-p {
+  font-family: var(--font-primary);
+}
+.font-group button.font-s {
+  font-family: var(--font-secondary);
+}
+.font-group button.font-m {
+  font-family: var(--font-mono);
+}
+
+.color-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.color-group button {
+  border: none;
+  padding: 1.25rem;
+  border-radius: 50%;
+}
+
+.color-group button.red {
+  background-color: var(--color-red-400);
+}
+.color-group button.purple {
+  background-color: var(--color-purple-400);
+}
+.color-group button.cyan {
+  background-color: var(--color-cyan-300);
+}
+.color-group img {
+  position: absolute;
+}
+.color-group img.Purple {
+  top: 0.5rem;
+  right: 0.5rem;
+}
+.color-group img.Red {
+  top: 0.5rem;
+  right: 3.8rem;
+}
+.color-group img.Cyan {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
 footer {
   margin-top: 1rem;
   display: flex;
@@ -287,10 +461,4 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-}
-.setting-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: auto;
 }

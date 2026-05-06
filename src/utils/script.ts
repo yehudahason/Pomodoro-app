@@ -1,3 +1,5 @@
+// 1. Store the controller outside the function scope
+let currentTimerController: AbortController | null = null;
 /**
  * Sets the timer progress based on percentage (0 to 100)
  * @param {number} percent - The progress percentage
@@ -16,9 +18,13 @@ function setProgress(percent: number) {
   if (!circle) return;
   circle.style.strokeDashoffset = String(offset);
 }
-
-// 1. Store the controller outside the function scope
-let currentTimerController: AbortController | null = null;
+let updateUI = (totalSecs: number) => {
+  let timeEl: HTMLElement | null = document.querySelector("#time-display h1");
+  if (!timeEl) return;
+  const m = Math.floor(totalSecs / 60);
+  const s = totalSecs % 60;
+  timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
+};
 
 export function run(minutes: number) {
   // 2. If a previous run exists, cancel it immediately
@@ -31,17 +37,9 @@ export function run(minutes: number) {
   currentTimerController = new AbortController();
   const { signal } = currentTimerController;
 
-  const timeEl: HTMLElement | null = document.querySelector("#time-display h1");
   let totalSeconds = minutes * 60;
   const decrementAmount = 100 / totalSeconds;
   let currentPercent = 100;
-
-  const updateUI = (totalSecs: number) => {
-    if (!timeEl) return;
-    const m = Math.floor(totalSecs / 60);
-    const s = totalSecs % 60;
-    timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
-  };
 
   updateUI(totalSeconds);
 
@@ -72,3 +70,14 @@ export function run(minutes: number) {
     once: true,
   });
 }
+
+export function setStart(minutes: number) {
+  updateUI(minutes * 60);
+  setProgress(100);
+}
+
+export function stop() {
+  currentTimerController?.abort();
+}
+
+//

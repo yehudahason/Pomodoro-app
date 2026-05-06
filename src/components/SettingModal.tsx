@@ -1,29 +1,37 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../ThemeProvider";
+import type { Color, Font, BreakTimes, Mode } from "../types/types";
 const baseUrl = import.meta.env.BASE_URL;
 
 const SettingsModal = () => {
   const context = useContext(ThemeContext);
+  let [tbreak, tsetBreak] = useState<BreakTimes>({
+    pomodoro: context?.breakTimes?.pomodoro || 25,
+    short: context?.breakTimes?.short || 5,
+    long: context?.breakTimes?.long || 15,
+  });
+  const [tfont, tsetFont] = useState<Font>(context?.font || "font-m");
+  const [tcolor, tsetColor] = useState<Color>(context?.color || "Cyan");
+
   const setColor = context?.setColor || (() => {});
   const setFont = context?.setFont || (() => {});
   const setBreakTimes = context?.setBreakTimes || (() => {});
-  const color = context?.color;
-  console.log(context);
-  const font = context?.font;
-  const breakTimes = context?.breakTimes || {
-    pomodoro: 25,
-    short: 5,
-    long: 15,
-  };
 
-  let tcolor = color;
-  let tfont = font;
-  let tbreak = {
-    pomodoro: breakTimes.pomodoro,
-    short: breakTimes.short,
-    long: breakTimes.long,
-  };
   // Re-run if color changes
+  function stepUp(which: Mode) {
+    tsetBreak({
+      ...tbreak,
+      [which]: tbreak[which] + 1,
+    });
+  }
+  function stepDown(which: Mode) {
+    tsetBreak({ ...tbreak, [which]: tbreak[which] - 1 });
+  }
+
+  useEffect(() => {
+    console.log(tcolor);
+  }, [tcolor]);
+
   return (
     <div className="settings-modal">
       <header>
@@ -35,41 +43,86 @@ const SettingsModal = () => {
 
       <div className="settings-content">
         {/* Time Settings */}
-        <section>
+        <section className="section1">
           <h3>Time (Minutes)</h3>
           <div className="time-inputs">
             <div className="input-group">
               <label>pomodoro</label>
               <input
                 type="number"
-                defaultValue={breakTimes.pomodoro}
+                value={tbreak.pomodoro}
                 min={1}
                 onChange={(e) => {
-                  tbreak = { ...tbreak, pomodoro: +e.target.value };
+                  tsetBreak({ ...tbreak, pomodoro: +e.target.value });
                 }}
               />
+              <div className="arrow-container">
+                <button
+                  className="arrow up"
+                  onClick={(_) => stepUp("pomodoro")}
+                >
+                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                </button>
+                <button
+                  className="arrow down"
+                  onClick={(_) => stepDown("pomodoro")}
+                >
+                  <img
+                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
+                    alt="down"
+                  />
+                </button>
+              </div>
             </div>
             <div className="input-group">
               <label>short break</label>
               <input
                 type="number"
-                defaultValue={breakTimes.short}
+                value={tbreak.short}
                 min={1}
                 onChange={(e) => {
-                  tbreak = { ...tbreak, short: +e.target.value };
+                  tsetBreak({ ...tbreak, short: +e.target.value });
                 }}
               />
+              <div className="arrow-container">
+                <button className="arrow up" onClick={(_) => stepUp("short")}>
+                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                </button>
+                <button
+                  className="arrow down"
+                  onClick={(_) => stepDown("short")}
+                >
+                  <img
+                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
+                    alt="down"
+                  />
+                </button>
+              </div>
             </div>
             <div className="input-group">
               <label>long break</label>
               <input
                 type="number"
-                defaultValue={breakTimes.long}
+                value={tbreak.long}
                 min={1}
                 onChange={(e) => {
-                  tbreak = { ...tbreak, long: +e.target.value };
+                  tsetBreak({ ...tbreak, long: +e.target.value });
                 }}
               />
+              <div className="arrow-container">
+                <button className="arrow up" onClick={(_) => stepUp("long")}>
+                  <img src={`${baseUrl}/assets/icon-arrow-up.svg`} alt="up" />
+                </button>
+                <button
+                  className="arrow down"
+                  onClick={(_) => stepDown("long")}
+                >
+                  <img
+                    src={`${baseUrl}/assets/icon-arrow-down.svg`}
+                    alt="down"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -77,25 +130,25 @@ const SettingsModal = () => {
         {/* Font Settings */}
         <section className="selection-row">
           <h3>Font</h3>
-          <div className="radio-group">
+          <div className="font-group">
             <button
               type="button"
-              className="color-btn active"
-              onClick={(_) => (tfont = "font-p")}
+              className={`font-p ${tfont === "font-p" ? "active" : ""}`}
+              onClick={(_) => tsetFont("font-p")}
             >
               Aa
             </button>
             <button
               type="button"
-              className="color-btn"
-              onClick={(_) => (tfont = "font-s")}
+              className={`font-s ${tfont === "font-s" ? "active" : ""}`}
+              onClick={(_) => tsetFont("font-s")}
             >
               Aa
             </button>
             <button
               type="button"
-              className="color-btn"
-              onClick={(_) => (tfont = "font-m")}
+              className={`font-m ${tfont === "font-m" ? "active" : ""}`}
+              onClick={(_) => tsetFont("font-m")}
             >
               Aa
             </button>
@@ -105,34 +158,27 @@ const SettingsModal = () => {
         {/* Color Settings */}
         <section className="selection-row">
           <h3>Color</h3>
-          <div className="radio-group">
-            <button className="color-red active">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="11">
-                <path
-                  fill="none"
-                  stroke="#1E213F"
-                  strokeWidth="2"
-                  d="M1 5.5l4.5 4.5L14 1"
-                />
-              </svg>
-            </button>
-            <button className="color-cyan" onClick={(_) => (tcolor = "Cyan")}>
-              Cyan
-            </button>
+          <div className="color-group">
+            <img
+              src={`${baseUrl}/assets/check.svg`}
+              alt="checkmark"
+              className={tcolor}
+            />
+
+            <button
+              className="cyan"
+              onClick={(_) => tsetColor("Cyan")}
+            ></button>
             <button
               type="button"
-              className="color-red"
-              onClick={(_) => (tcolor = "Red")}
-            >
-              Red
-            </button>
+              className="red"
+              onClick={(_) => tsetColor("Red")}
+            ></button>
             <button
               type="button"
-              className="color-purple"
-              onClick={(_) => (tcolor = "Purple")}
-            >
-              Purple
-            </button>
+              className="purple"
+              onClick={(_) => tsetColor("Purple")}
+            ></button>
           </div>
         </section>
       </div>

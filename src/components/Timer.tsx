@@ -1,5 +1,3 @@
-import type { Color } from "../types/types";
-
 export default function Timer({ color }: { color: string }) {
   return (
     <div className="timer-container">

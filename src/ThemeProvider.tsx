@@ -13,7 +13,7 @@ export const ThemeContext = createContext<{
   setBreakTimes: Function;
 } | null>(null);
 export function ThemeProvider({ children }: { children: any }) {
-  const [color, setColor] = useState<Color>("Red");
+  const [color, setColor] = useState<Color>("Cyan");
   const [font, setFont] = useState<Font>("font-m");
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [breakTimes, setBreakTimes] = useState<BreakTimes>({

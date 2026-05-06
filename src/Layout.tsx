@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { run } from "./utils/script";
+import { run, setStart, stop } from "./utils/script";
 import { useState, useContext, useLayoutEffect } from "react";
 import type { Mode } from "./types/types";
 import { ThemeContext } from "./ThemeProvider";
@@ -25,7 +25,8 @@ const Layout = () => {
     setActiveMode(mode);
 
     // 2. Trigger the timer logic (which now handles its own AbortController)
-    run(time);
+    stop();
+    setStart(time);
   };
 
   useLayoutEffect(() => {
