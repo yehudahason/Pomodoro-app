@@ -15,7 +15,7 @@ export const ThemeContext = createContext<{
   setMode: Function;
 } | null>(null);
 export function ThemeProvider({ children }: { children: any }) {
-  const [color, setColor] = useState<Color>("Cyan");
+  const [color, setColor] = useState<Color>("Red");
   const [mode, setMode] = useState<Mode>("pomodoro");
   const [font, setFont] = useState<Font>("font-p");
   const [showSetting, setShowSetting] = useState<boolean>(false);
