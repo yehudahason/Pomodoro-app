@@ -25,12 +25,18 @@ const SettingsModal = () => {
 
   // Re-run if color changes
   function stepUp(which: Mode) {
+    if (tbreak[which] >= 60) {
+      return;
+    }
     tsetBreak({
       ...tbreak,
       [which]: tbreak[which] + 1,
     });
   }
   function stepDown(which: Mode) {
+    if (tbreak[which] <= 1) {
+      return;
+    }
     tsetBreak({ ...tbreak, [which]: tbreak[which] - 1 });
   }
 
@@ -59,7 +65,11 @@ const SettingsModal = () => {
                 value={tbreak.pomodoro}
                 min={1}
                 onChange={(e) => {
-                  tsetBreak({ ...tbreak, pomodoro: +e.target.value });
+                  const val = +e.target.value;
+                  // Only update state if the value is 1 or higher
+                  if (val >= 1 && val <= 60) {
+                    tsetBreak({ ...tbreak, pomodoro: val });
+                  }
                 }}
               />
               <div className="arrow-container">
@@ -84,7 +94,11 @@ const SettingsModal = () => {
                 value={tbreak.short}
                 min={1}
                 onChange={(e) => {
-                  tsetBreak({ ...tbreak, short: +e.target.value });
+                  const val = +e.target.value;
+                  // Only update state if the value is 1 or higher
+                  if (val >= 1 && val <= 60) {
+                    tsetBreak({ ...tbreak, short: val });
+                  }
                 }}
               />
               <div className="arrow-container">
@@ -106,7 +120,11 @@ const SettingsModal = () => {
                 value={tbreak.long}
                 min={1}
                 onChange={(e) => {
-                  tsetBreak({ ...tbreak, long: +e.target.value });
+                  const val = +e.target.value;
+                  // Only update state if the value is 1 or higher
+                  if (val >= 1 && val <= 60) {
+                    tsetBreak({ ...tbreak, long: val });
+                  }
                 }}
               />
               <div className="arrow-container">

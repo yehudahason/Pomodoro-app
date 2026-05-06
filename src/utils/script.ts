@@ -1,5 +1,9 @@
+import { handleRestart } from "../components/Timer";
 // 1. Store the controller outside the function scope
 let currentTimerController: AbortController | null = null;
+let currentRemainingSeconds: number = 0;
+let currentPercent: number = 100;
+let isPaused: boolean = false;
 /**
  * Sets the timer progress based on percentage (0 to 100)
  * @param {number} percent - The progress percentage
@@ -25,58 +29,71 @@ let updateUI = (totalSecs: number) => {
   const s = totalSecs % 60;
   timeEl.innerText = `${m}:${s.toString().padStart(2, "0")}`;
 };
+export function pause() {
+  if (currentTimerController) {
+    currentTimerController.abort(); // Stops the interval via the signal
+    isPaused = true;
+    // We don't reset currentRemainingSeconds here; we keep them for resuming
+  }
+}
 
 export function start(minutes: number) {
-  console.log(minutes);
-  // 2. If a previous run exists, cancel it immediately
+  // 1. If a previous run exists, cancel it
   if (currentTimerController) {
     currentTimerController.abort();
-    setProgress(100);
   }
 
-  // 3. Create a new controller for this specific run
   currentTimerController = new AbortController();
   const { signal } = currentTimerController;
 
-  let totalSeconds = minutes * 60;
-  const decrementAmount = 100 / totalSeconds;
-  let currentPercent = 100;
+  // 2. Logic to Resume or Start Fresh
+  if (!isPaused) {
+    currentRemainingSeconds = minutes * 60;
+    currentPercent = 100;
+  }
+  isPaused = false; // Reset pause flag now that we are starting
 
-  updateUI(totalSeconds);
+  const totalDuration = minutes * 60;
+  const decrementAmount = 100 / totalDuration;
+
+  updateUI(currentRemainingSeconds);
 
   const interval = setInterval(() => {
-    // 4. Check if this specific run was aborted
     if (signal.aborted) {
       clearInterval(interval);
       return;
     }
 
-    totalSeconds--;
+    currentRemainingSeconds--;
     currentPercent -= decrementAmount;
 
-    if (totalSeconds <= 0) {
+    if (currentRemainingSeconds <= 0) {
       updateUI(0);
-      setProgress(0);
       setProgress(100);
       clearInterval(interval);
+      handleRestart();
       return;
     }
 
-    updateUI(totalSeconds);
+    updateUI(currentRemainingSeconds);
     setProgress(currentPercent);
   }, 1000);
 
-  // 5. Cleanup listener
   signal.addEventListener("abort", () => clearInterval(interval), {
     once: true,
   });
 }
 
-export function setStart(minutes: number) {
-  updateUI(minutes * 60);
+// Ensure stop resets the pause state completely
+export function stop() {
+  currentTimerController?.abort();
+  isPaused = false;
+  currentRemainingSeconds = 0;
+  currentPercent = 100;
   setProgress(100);
 }
 
-export function stop() {
-  currentTimerController?.abort();
+export function setStart(minutes: number) {
+  updateUI(minutes * 60);
+  setProgress(100);
 }

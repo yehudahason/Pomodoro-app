@@ -1,29 +1,55 @@
-import { useState, useContext, useMemo } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../ThemeProvider";
-import { start, stop } from "../utils/script";
+import { pause, start, stop } from "../utils/script";
+let restartVar = false;
 
+export function handleRestart() {
+  restartVar = true;
+}
 export default function Timer() {
-  const [runing, setRuning] = useState<boolean>(false);
   const context = useContext(ThemeContext);
   const color = context?.color || "Cyan";
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [needsRestart, setNeedsRestart] = useState<boolean>(false);
   const breakTimes = context?.breakTimes || {
     pomodoro: 25,
     short: 5,
     long: 15,
   };
+
   const mode = context?.mode || "pomodoro";
+
+  // 1. Monitor the external variable
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (restartVar) {
+        setNeedsRestart(true);
+        restartVar = false;
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
+
+  // 2. Reset timer when mode/settings change
+  useEffect(() => {
+    setIsRunning(false);
+    stop(); // Assuming you want to stop the old timer
+  }, [breakTimes, mode]);
+
   function handleChange() {
-    if (runing) {
-      stop();
-      setRuning(false);
+    if (isRunning) {
+      if (needsRestart) {
+        start(breakTimes[mode]);
+        setNeedsRestart(false);
+      } else {
+        pause();
+        setIsRunning(false);
+      }
     } else {
       start(breakTimes[mode]);
-      setRuning(true);
+      setIsRunning(true);
     }
   }
-  useMemo(() => {
-    setRuning(false);
-  }, [breakTimes, mode]);
   return (
     <div className="timer-container">
       <svg className="timer-svg" viewBox="0 0 200 200">
@@ -37,12 +63,8 @@ export default function Timer() {
       </svg>
       <div id="time-display">
         <h1></h1>
-        <p
-          onClick={(_) => {
-            handleChange();
-          }}
-        >
-          {runing ? "Stop" : "Start"}
+        <p onClick={handleChange}>
+          {isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}
         </p>
       </div>
     </div>
