@@ -43,12 +43,13 @@ const SettingsModal = () => {
     <div className={`settings-modal ${show ? "show" : ""}`}>
       <header>
         <h2>Settings</h2>
-        <button type="button" className="close" aria-label="Close">
-          <img
-            src={`${baseUrl}/assets/close.svg`}
-            alt="close"
-            onClick={() => setShowSetting(false)}
-          />
+        <button
+          type="button"
+          className="close"
+          aria-label="Close"
+          onClick={() => setShowSetting(false)}
+        >
+          <img src={`${baseUrl}/assets/close.svg`} alt="close" />
         </button>
       </header>
 
@@ -96,7 +97,7 @@ const SettingsModal = () => {
               </div>
             </form>
 
-            <form className="input-group">
+            <div className="input-group">
               <label htmlFor="short">short break</label>
               <input
                 id="short"
@@ -133,8 +134,8 @@ const SettingsModal = () => {
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </form>
-            <form className="input-group">
+            </div>
+            <div className="input-group">
               <label htmlFor="long">long break</label>
               <input
                 id="long"
@@ -171,7 +172,7 @@ const SettingsModal = () => {
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </section>
 

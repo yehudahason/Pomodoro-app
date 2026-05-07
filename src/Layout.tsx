@@ -84,13 +84,12 @@ const Layout = () => {
       </main>
 
       <footer>
-        <div className="setting-btn">
-          <img
-            src={`${baseUrl}/assets/icon-settings.svg`}
-            alt=""
-            onClick={() => setShowSetting(!showSetting)}
-          />
-        </div>
+        <button
+          className="setting-btn"
+          onClick={() => setShowSetting(!showSetting)}
+        >
+          <img src={`${baseUrl}/assets/icon-settings.svg`} alt="" />
+        </button>
         <Footer />
       </footer>
     </div>

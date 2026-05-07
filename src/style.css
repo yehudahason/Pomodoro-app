@@ -371,6 +371,9 @@ circle {
   justify-content: center;
   align-items: center;
   min-height: auto;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .setting-btn img:hover {
