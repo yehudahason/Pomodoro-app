@@ -58,7 +58,7 @@ const SettingsModal = () => {
         <section className="section1">
           <h3>Time (Minutes)</h3>
           <div className="time-inputs">
-            <form className="input-group">
+            <div className="input-group">
               <label htmlFor="pomodoro">pomodoro</label>
               <input
                 id="pomodoro"
@@ -77,8 +77,7 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow up"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepUp("pomodoro");
                   }}
                 >
@@ -87,15 +86,14 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow down"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepDown("pomodoro");
                   }}
                 >
                   <img className="svg-icon" src={ArrowDown} alt="down" />
                 </button>
               </div>
-            </form>
+            </div>
 
             <div className="input-group">
               <label htmlFor="short">short break</label>
@@ -104,7 +102,7 @@ const SettingsModal = () => {
                 type="number"
                 value={tbreak.short}
                 min={1}
-                onChange={(e) => {
+                onChange={(_) => {
                   const val = +e.target.value;
                   // Only update state if the value is 1 or higher
                   if (val >= 1 && val <= 60) {
@@ -116,8 +114,7 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow up"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepUp("short");
                   }}
                 >
@@ -126,8 +123,7 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow down"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepDown("short");
                   }}
                 >
@@ -154,8 +150,7 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow up"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepUp("long");
                   }}
                 >
@@ -164,8 +159,7 @@ const SettingsModal = () => {
                 <button
                   type="button"
                   className="arrow down"
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={(_) => {
                     stepDown("long");
                   }}
                 >
