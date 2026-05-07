@@ -102,7 +102,7 @@ const SettingsModal = () => {
                 type="number"
                 value={tbreak.short}
                 min={1}
-                onChange={(_) => {
+                onChange={(e) => {
                   const val = +e.target.value;
                   // Only update state if the value is 1 or higher
                   if (val >= 1 && val <= 60) {
