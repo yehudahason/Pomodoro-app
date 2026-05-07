@@ -1,9 +1,8 @@
 {
-  "name": "quiz-app",
+  "name": "pomodoro-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/yehudahason/quiz-app",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
