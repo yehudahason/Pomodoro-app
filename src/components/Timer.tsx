@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../ThemeProvider";
-import { pause, start, stop } from "../utils/script";
+import { pause, setStart, start, stop } from "../utils/script";
 import type { KeyboardEvent } from "react";
 let restartVar = false;
 
@@ -19,8 +19,15 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [needsRestart, setNeedsRestart] = useState<boolean>(false);
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
       handleChange();
+    } else if (event.key === "Escape") {
+      event.preventDefault();
+      stop();
+      setIsRunning(false);
+      setNeedsRestart(false);
+      setStart(breakTimes[mode]);
     }
   };
   // 1. Monitor the external variable
@@ -66,15 +73,15 @@ export default function Timer() {
         />
       </svg>
       <div id="time-display">
-        <h1></h1>
-        <p
+        <h1>00:00</h1>
+        <div
           onKeyDown={handleKeyDown}
           tabIndex={0}
           onClick={handleChange}
           className={color.toLowerCase()}
         >
-          {isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}
-        </p>
+          <p>{isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}</p>
+        </div>
       </div>
     </div>
   );
