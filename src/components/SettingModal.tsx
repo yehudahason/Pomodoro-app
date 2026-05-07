@@ -20,8 +20,8 @@ const SettingsModal = () => {
   const setFont = context?.setFont || (() => {});
   const setBreakTimes = context?.setBreakTimes || (() => {});
 
-  const [tfont, tsetFont] = useState<Font>(context?.font || "font-m");
-  const [tcolor, tsetColor] = useState<Color>(context?.color || "Cyan");
+  const [tfont, tsetFont] = useState<Font>(context?.font || "font-p");
+  const [tcolor, tsetColor] = useState<Color>(context?.color || "Red");
   // Re-run if color changes
   function stepUp(which: Mode) {
     if (tbreak[which] >= 60) {
@@ -215,13 +215,13 @@ const SettingsModal = () => {
 
             <button
               type="button"
-              className="cyan"
-              onClick={(_) => tsetColor("Cyan")}
+              className="red"
+              onClick={(_) => tsetColor("Red")}
             ></button>
             <button
               type="button"
-              className="red"
-              onClick={(_) => tsetColor("Red")}
+              className="cyan"
+              onClick={(_) => tsetColor("Cyan")}
             ></button>
             <button
               type="button"
