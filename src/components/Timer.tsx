@@ -18,6 +18,7 @@ export default function Timer() {
   const mode = context?.mode || "pomodoro";
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [needsRestart, setNeedsRestart] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -52,13 +53,16 @@ export default function Timer() {
       if (needsRestart) {
         start(breakTimes[mode]);
         setNeedsRestart(false);
+        setIsPaused(false); // Reset pause state on restart
       } else {
         pause();
         setIsRunning(false);
+        setIsPaused(true); // Set to paused
       }
     } else {
       start(breakTimes[mode]);
       setIsRunning(true);
+      setIsPaused(false); // It's running now
     }
   }
   return (
@@ -80,7 +84,15 @@ export default function Timer() {
           onClick={handleChange}
           className={color.toLowerCase()}
         >
-          <p>{isRunning ? (needsRestart ? "Restart" : "Pause") : "Start"}</p>
+          <p>
+            {isRunning
+              ? needsRestart
+                ? "Restart"
+                : "Pause"
+              : isPaused
+                ? "Resume"
+                : "Start"}
+          </p>
         </div>
       </div>
     </div>
