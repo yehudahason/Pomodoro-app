@@ -180,6 +180,7 @@ const SettingsModal = () => {
           <h3>Font</h3>
           <div className="font-group">
             <button
+              aria-label="font primary"
               type="button"
               className={`font-p ${tfont === "font-p" ? "active" : ""}`}
               onClick={(_) => tsetFont("font-p")}
@@ -187,6 +188,7 @@ const SettingsModal = () => {
               Aa
             </button>
             <button
+              aria-label="font secondary"
               type="button"
               className={`font-s ${tfont === "font-s" ? "active" : ""}`}
               onClick={(_) => tsetFont("font-s")}
@@ -194,6 +196,7 @@ const SettingsModal = () => {
               Aa
             </button>
             <button
+              aria-label="font mono"
               type="button"
               className={`font-m ${tfont === "font-m" ? "active" : ""}`}
               onClick={(_) => tsetFont("font-m")}
@@ -209,7 +212,7 @@ const SettingsModal = () => {
           <div className="color-group">
             <img
               src={`${baseUrl}/assets/check.svg`}
-              alt="checkmark"
+              alt=""
               className={tcolor}
             />
 
