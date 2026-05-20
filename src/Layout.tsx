@@ -41,7 +41,7 @@ const Layout = () => {
       <header>
         <h1>Pomodoro</h1>
         <nav>
-          <ul>
+          <ul aria-label="break mode">
             <li>
               <button
                 type="button"
@@ -85,6 +85,7 @@ const Layout = () => {
 
       <footer>
         <button
+          aria-label="setting"
           className="setting-btn"
           onClick={() => setShowSetting(!showSetting)}
         >

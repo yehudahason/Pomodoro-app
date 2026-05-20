@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { ThemeContext } from "../ThemeProvider";
 import type { Color, Font, BreakTimes, Mode } from "../types/types";
 import { setStart, stop } from "../utils/script";
@@ -22,6 +22,8 @@ const SettingsModal = () => {
 
   const [tfont, tsetFont] = useState<Font>(context?.font || "font-p");
   const [tcolor, tsetColor] = useState<Color>(context?.color || "Red");
+
+  const ref = useRef<HTMLButtonElement>(null);
   // Re-run if color changes
   function stepUp(which: Mode) {
     if (tbreak[which] >= 60) {
@@ -38,7 +40,9 @@ const SettingsModal = () => {
     }
     tsetBreak({ ...tbreak, [which]: tbreak[which] - 1 });
   }
-
+  useEffect(() => {
+    ref.current?.focus();
+  }, [show]);
   return (
     <div className={`settings-modal ${show ? "show" : ""}`}>
       <header>
@@ -75,6 +79,7 @@ const SettingsModal = () => {
               />{" "}
               <div className="arrow-container">
                 <button
+                  ref={ref}
                   type="button"
                   className="arrow up"
                   onClick={(_) => {
@@ -209,16 +214,19 @@ const SettingsModal = () => {
             />
 
             <button
+              aria-label="red"
               type="button"
               className="red"
               onClick={(_) => tsetColor("Red")}
             ></button>
             <button
+              aria-label="cyan"
               type="button"
               className="cyan"
               onClick={(_) => tsetColor("Cyan")}
             ></button>
             <button
+              aria-label="purple"
               type="button"
               className="purple"
               onClick={(_) => tsetColor("Purple")}
